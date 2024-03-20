@@ -57,6 +57,7 @@ Class EmbedBuilder {
       if IsSet(timestamp)
          if !RegExMatch(timestamp, "i)\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}")
             throw Error("invalid timestamp", , timestamp)
+      time := A_NowUTC
       this.embedObj.timestamp := timestamp || SubStr(time, 1,4) "-" SubStr(time,5,2) "-" SubStr(time,7,2) "T" SubStr(time,9,2) ":" SubStr(time,11,2) ":" SubStr(time,13,2) ".000Z"
    }
    /**
