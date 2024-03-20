@@ -53,11 +53,11 @@ Class EmbedBuilder {
     * @param {timestamp} timestamp "\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}"
     * @default this.now()
     */
-   setTimeStamp(timestamp?) {
+   setTimeStamp(timestamp:="") {
       if IsSet(timestamp)
          if !RegExMatch(timestamp, "i)\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}")
             throw Error("invalid timestamp", , timestamp)
-      this.embedObj.timestamp := isSet(timestamp) ? timestamp : this.now()
+      this.embedObj.timestamp := timestamp || SubStr(time, 1,4) "-" SubStr(time,5,2) "-" SubStr(time,7,2) "T" SubStr(time,9,2) ":" SubStr(time,11,2) ":" SubStr(time,13,2) ".000Z"
    }
    /**
     * @method setAuthor()
@@ -121,7 +121,6 @@ Class EmbedBuilder {
          throw Error("requires an url or attachment.attachmentName (attachment://filename.extension)", , thumbnail.url)
       this.embedObj.thumbnail := thumbnail
    }
-   now() => Format("{:4}-{:2}-{:2}T{:2}:{:2}:{:2}.000Z", A_YYYY, A_MM, A_DD, A_Hour, A_Min, A_Sec)
    hasVal(obj, val) {
       for k, v in obj
          if v = val
